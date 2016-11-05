@@ -22,19 +22,19 @@ $(document).on('click', 'p', function(){
   })
     // with that done, add the note information to the page
     .done(function( data ) {
-      console.log(data);
       // the title of the article
       $('#submitNote').attr('data-id', data._id);
       $('#notes').attr('data-id', data._id);
       $('#notes').append('<h3>Title: ' + data.title + '</h3>');
       // if there's a note in the article
       if(data.note){
-        // place the title of the note in the title input
-        $('#notes').append('<h4>Note:</h4><p>Title: ' + data.note.title + '</p>');
-        // place the body of the note in the body textarea
-        $('#notes').append('<p>Body: ' + data.note.body + '</p>');
-        $('#notes').append('<button data-id=' + data._id + ' note-id=' + data.note._id + '>Remove</button>');
-
+        for (var i = 0; i < data.note.length; i++) {
+          // place the title of the note in the title input
+          $('#notes').append('<h4>Note:</h4><p>Title: ' + data.note[i].title + '</p>');
+          // place the body of the note in the body textarea
+          $('#notes').append('<p>Body: ' + data.note[i].body + '</p>');
+          $('#notes').append('<button data-id=' + data._id + ' note-id=' + data.note[i]._id + '>Remove</button>');
+        }
       } else {
         console.log('no note');
       }
@@ -53,7 +53,9 @@ $('#notes').on('click', 'button', function() {
     }
   })
     .done(function(data) {
+      // log the response
       console.log(data);
+      // empty the notes section
       $('#notes').empty();
     })
 })

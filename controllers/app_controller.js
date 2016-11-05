@@ -94,12 +94,17 @@ router.get('/articles/:id', function(req, res){
 router.post('/articles/delete', function(req, res) {
 	var thisId = req.body.thisId;
 	var noteId = req.body.noteId;
-	console.log(thisId, noteId);
-	// res.send('success');
 
+	Article.update({_id: thisId}, {$pull: {note: noteId}});
     Article.findOne({_id: thisId}, function(err, article) {
-		article.note = undefined;
-		article.save();
+		if (err) {
+			console.log(err);
+		} else {
+			noteArray = article.note;
+			var index = article.note.indexOf(noteId);
+			article.note.splice(index, 1);
+			article.save();
+		}
 	});
 	Note.remove({_id: noteId}, function(err) {
 		if(err) {
@@ -115,7 +120,6 @@ router.post('/articles/delete', function(req, res) {
 // or if no note exists for an article, make the posted note it's note.
 router.post('/articles/:id', function(req, res){
 	// create a new note and pass the req.body to the entry.
-	console.log(req.body);
 	var newNote = new Note(req.body);
 
 	// and save the new note the db
@@ -129,8 +133,7 @@ router.post('/articles/:id', function(req, res){
 			// using the Article id passed in the id parameter of our url,
 			// prepare a query that finds the matching Article in our db
 			// and update it to make it's lone note the one we just saved
-			Article.findOneAndUpdate({'_id': req.params.id}, {'note':doc._id})
-			// Article.findOneAndUpdate({'_id': req.params.id}, {$push: {'note': doc._id}})
+			Article.findOneAndUpdate({'_id': req.params.id}, {$push: {'note': doc._id}})
 			// execute the above query
 			.exec(function(err, doc){
 				// log any errors
