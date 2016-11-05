@@ -57,6 +57,30 @@ $('#notes').on('click', 'button', function() {
       console.log(data);
       // empty the notes section
       $('#notes').empty();
+
+      $.ajax({
+        method: "GET",
+        url: "/articles/" + thisId,
+      })
+        // with that done, add the note information to the page
+        .done(function( data ) {
+          // the title of the article
+          $('#submitNote').attr('data-id', data._id);
+          $('#notes').attr('data-id', data._id);
+          $('#notes').append('<h3>Title: ' + data.title + '</h3>');
+          // if there's a note in the article
+          if(data.note){
+            for (var i = 0; i < data.note.length; i++) {
+              // place the title of the note in the title input
+              $('#notes').append('<h4>Note:</h4><p>Title: ' + data.note[i].title + '</p>');
+              // place the body of the note in the body textarea
+              $('#notes').append('<p>Body: ' + data.note[i].body + '</p>');
+              $('#notes').append('<button data-id=' + data._id + ' note-id=' + data.note[i]._id + '>Remove</button>');
+            }
+          } else {
+            console.log('no note');
+          }
+        });
     })
 })
 
@@ -80,6 +104,30 @@ $(document).on('click', '#submitNote', function(){
       console.log(data);
       // empty the notes section
       $('#notes').empty();
+
+      $.ajax({
+        method: "GET",
+        url: "/articles/" + thisId,
+      })
+        // with that done, add the note information to the page
+        .done(function( data ) {
+          // the title of the article
+          $('#submitNote').attr('data-id', data._id);
+          $('#notes').attr('data-id', data._id);
+          $('#notes').append('<h3>Title: ' + data.title + '</h3>');
+          // if there's a note in the article
+          if(data.note){
+            for (var i = 0; i < data.note.length; i++) {
+              // place the title of the note in the title input
+              $('#notes').append('<h4>Note:</h4><p>Title: ' + data.note[i].title + '</p>');
+              // place the body of the note in the body textarea
+              $('#notes').append('<p>Body: ' + data.note[i].body + '</p>');
+              $('#notes').append('<button data-id=' + data._id + ' note-id=' + data.note[i]._id + '>Remove</button>');
+            }
+          } else {
+            console.log('no note');
+          }
+        });
     });
 
   // Also, remove the values entered in the input and textarea for note entry
