@@ -100,7 +100,6 @@ router.post('/articles/delete', function(req, res) {
 		if (err) {
 			console.log(err);
 		} else {
-			noteArray = article.note;
 			var index = article.note.indexOf(noteId);
 			article.note.splice(index, 1);
 			article.save();
