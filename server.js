@@ -24,7 +24,8 @@ app.use(express.static('public'));
 app.use('/', app_controller);
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/storyScraper');
+mongoose.connect('mongodb://heroku_dg5kddj0:trokgd6n5em8ovi45b8quefp7a@ds145667.mlab.com:45667/heroku_dg5kddj0');
+// mongoose.connect('mongodb://localhost/storyScraper');
 var db = mongoose.connection;
 
 // show any mongoose errors
