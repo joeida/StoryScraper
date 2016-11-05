@@ -1,6 +1,20 @@
 body{
   /*background-color: #DECADE*/
-  background-color: #F2F6D0
+  background-color: #1E90FF;
+  color: #FFFFE0;
+}
+h1,h2,h3,#notes,#articles {
+  text-align: center;
+}
+h1,h2 {
+  color: gold;
+}
+h3 {
+  color: silver;
+}
+button {
+  display: block;
+  margin: 0 auto;
 }
 #wrapper{
   width:960px;
@@ -25,7 +39,8 @@ body{
 textarea, input{
   display:block;
   width:100%;
-  background-color: #FCF5C7;
+  background-color: #00BFFF;
+  color: white;
 }
 input{
   height:36px;

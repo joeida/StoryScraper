@@ -1,10 +1,10 @@
 // grab the articles as a json
 $.getJSON('/articles', function(data) {
   // for each one
-  $('#articles').append('<h2>Choose Scraped Item</h2>');
+  $('#articles').append('<h3>Choose Scraped Item</h3>');
   for (var i = 0; i<data.length; i++){
     // display the apropos information on the page
-    $('#articles').append('<p data-id="' + data[i]._id + '">'+ data[i].title + '<br />'+ data[i].link + '</p>');
+    $('#articles').append('<p data-id="' + data[i]._id + '">'+ data[i].title + '</p><a href='+ data[i].link + ' target=_blank>Article Link</a>');
   }
 });
 
@@ -26,7 +26,7 @@ $(document).on('click', 'p', function(){
       // the title of the article
       $('#submitNote').attr('data-id', data._id);
       $('#notes').attr('data-id', data._id);
-      $('#notes').append('<h3>Title: ' + data.title + '</h3>');
+      $('#notes').append('<h3>' + data.title + '</h3>');
       // if there's a note in the article
       if(data.note){
         for (var i = 0; i < data.note.length; i++) {
