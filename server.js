@@ -24,7 +24,7 @@ app.use(express.static('public'));
 app.use('/', app_controller);
 
 // Database configuration with mongoose
-mongoose.connect('mongodb://localhost/week18day3mongoose');
+mongoose.connect('mongodb://localhost/storyScraper');
 var db = mongoose.connection;
 
 // show any mongoose errors
